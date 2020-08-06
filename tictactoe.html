@@ -66,26 +66,35 @@ function updateText(btn)
 
 {
 
-   var text;
+   var player1Text = 'X';
+   var player2Text = 'O';
 
-   var colour;
+   var player1Colour = 'red';
+   var player2Colour = 'blue';
 
+
+   var currentText;
+   var currentColour;
+   var nextText;
+   var nextColour;
 
 
    if(count % 2 == 1 && winState == false)
 
     {
-      text = "X";
-      colour = "red";
-      updatePlayerDisplay(text, colour);
+      currentText = player1Text;
+      currentColour = player1Colour;
+      nextText = player2Text;
+      nextColour = player2Colour;
     }
 
     else if(count % 2 == 0 && winState == false)
 
     {
-      text = "O";
-      colour = "blue";
-      updatePlayerDisplay(text,colour);
+      currentText = player2Text;
+      currentColour = player2Colour;
+      nextText = player1Text;
+      nextColour = player1Colour;
     }
 
 
@@ -96,9 +105,11 @@ function updateText(btn)
 
        //Change the display look of the button to represent the most recent press
 
-      document.getElementById(btn).innerText = text;
+      document.getElementById(btn).innerText = currentText;
 
-      document.getElementById(btn).style.color = colour;
+      document.getElementById(btn).style.color = currentColour;
+
+      updatePlayerDisplay(nextText, nextColour);
 
       checkWin(btn)
 
@@ -245,7 +256,7 @@ function win(box1, box2, box3)
    <div class="centreText" style='white-space:nowrap;'>
       <b>Welcome to my tic tac toe game!</b> <br>
 
-      <p id="playerDisplay">It is Player X's turn!</p>
+      <p id="playerDisplay">It is Player <span style='color:red'><b>X</b></span>'s turn!</p>
 
 
 
