@@ -58,7 +58,9 @@ div.centreText{
 
     var winState = false;
 
-
+function updatePlayerDisplay(text, colour){
+   document.getElementById('playerDisplay').innerHTML = "<p>It is Player <span style='color:"+colour+";'><b>"+text+"</b></span>'s turn!</p>";
+}
 
 function updateText(btn)
 
@@ -73,21 +75,17 @@ function updateText(btn)
    if(count % 2 == 1 && winState == false)
 
     {
-
       text = "X";
-
       colour = "red";
-
+      updatePlayerDisplay(text, colour);
     }
 
     else if(count % 2 == 0 && winState == false)
 
     {
-
       text = "O";
-
       colour = "blue";
-
+      updatePlayerDisplay(text,colour);
     }
 
 
@@ -246,6 +244,8 @@ function win(box1, box2, box3)
 <div class="centreWrapper">
    <div class="centreText" style='white-space:nowrap;'>
       <b>Welcome to my tic tac toe game!</b> <br>
+
+      <p id="playerDisplay">It is Player X's turn!</p>
 
 
 
