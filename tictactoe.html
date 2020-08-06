@@ -1,0 +1,275 @@
+<html>
+
+<head>
+
+</head>
+
+<style>
+
+button.game {
+
+text-align: center;
+
+font-size: 60px;
+
+border: 2px solid black;
+
+border-radius: 10px;
+
+padding: 20px 20px;
+
+display: inline-block;
+
+margin: 5px;
+
+width: 100px;
+
+height: 100px;
+
+}
+
+div.centreWrapper{
+    width: 50%;
+    color:var(--secondary-color);
+    margin: 16px auto;
+    padding: 20px;
+    max-width: 60%;
+    
+    border-radius: 8px;
+    background-color: var(--secondary-color);
+    
+}
+div.centreText{
+    text-align: center;
+}
+
+
+</style>
+
+
+
+<script>
+
+   //Declaring Variables
+
+    var count = 1;
+
+    var current;
+
+    var winState = false;
+
+
+
+function updateText(btn)
+
+{
+
+   var text;
+
+   var colour;
+
+
+
+   if(count % 2 == 1 && winState == false)
+
+    {
+
+      text = "X";
+
+      colour = "red";
+
+    }
+
+    else if(count % 2 == 0 && winState == false)
+
+    {
+
+      text = "O";
+
+      colour = "blue";
+
+    }
+
+
+
+    if(winState != true)
+
+    {
+
+       //Change the display look of the button to represent the most recent press
+
+      document.getElementById(btn).innerText = text;
+
+      document.getElementById(btn).style.color = colour;
+
+      checkWin(btn)
+
+    }
+
+
+
+document.getElementById(btn).onclick = null; //stops the button being clicked again.
+
+count++
+
+
+
+
+
+}
+
+
+
+function checkWin(recentPress)
+
+{
+
+ current = document.getElementById(recentPress).innerText; //Work out which player is currently placing their piece.
+
+
+
+ for(i = 1; i < 10; i++) {
+
+   this["sqr"+i] = document.getElementById(i).innerText;
+
+ }
+
+var wins = ["159", "753", "123", "456", "789", "147", "258", "369"]; //Defines each possible win condition as a 3 digit string.
+
+
+
+
+
+
+
+ for(i = 0; i < wins.length; i++) {
+
+   var val1 = wins[i].charAt(0);
+
+   var val2 = wins[i].charAt(1);
+
+   var val3 = wins[i].charAt(2);
+
+   if(this["sqr" + val1] == current && this["sqr" + val2] == current && this["sqr" + val3] == current)
+
+   {
+
+      win(document.getElementById(val1), document.getElementById(val2), document.getElementById(val3));
+
+   }
+
+  }
+
+ checkDraw(count);
+
+}
+
+
+
+function checkDraw(count)
+
+{
+
+   if(count == 9 && winState == false)
+
+   {
+
+      //display the draw state of the game.
+
+      var div = document.createElement('div');
+      div.style.cssText = 'text-align: center;';
+
+      div.textContent = "There was no winner, it was a draw!";
+
+      document.body.appendChild(div);
+
+      //Reset button
+      var button = document.createElement('button');
+
+      button.textContent = "Reset";
+      button.style.cssText = 'margin:auto; display:block;';
+      button.onclick = function(){window.location.reload();};
+
+      document.body.appendChild(button);
+
+   }
+
+
+
+   
+
+}
+
+
+
+function win(box1, box2, box3)
+
+{
+
+   var victoryColour = "green";
+
+    box1.style.backgroundColor = victoryColour;
+
+    box2.style.backgroundColor = victoryColour;
+
+    box3.style.backgroundColor = victoryColour;
+
+
+
+    //display the winner of the game
+
+    var div = document.createElement('div');
+    div.style.cssText = 'text-align: center;';
+
+    div.textContent = "Player " + current + " Wins!";
+
+    document.body.appendChild(div);
+
+   //Reset button
+    var button = document.createElement('button');
+
+    button.textContent = "Reset";
+    button.style.cssText = 'margin:auto; display:block;';
+    button.onclick = function(){window.location.reload();};
+  
+    document.body.appendChild(button);
+
+    winState = true;
+
+
+
+}
+</script>
+
+<body>
+
+<div class="centreWrapper">
+   <div class="centreText" style='white-space:nowrap;'>
+      <b>Welcome to my tic tac toe game!</b> <br>
+
+
+
+      <!--The Grid is laid out in the following pattern:-->
+
+      <!--  1  2  3  -->
+
+      <!--  4  5  6  -->
+
+      <!--  7  8  9  -->
+
+
+
+      <button type="button" id="1" class="game" onclick="updateText('1')">&nbsp;</button><button type="button" id="2" class="game" onclick="updateText('2')">&nbsp;</button><button type="button" id="3" class="game" onclick="updateText('3')">&nbsp;</button><br>
+
+      <button type="button" id="4" class="game" onclick="updateText('4')">&nbsp;</button><button type="button" id="5" class="game" onclick="updateText('5')">&nbsp;</button><button type="button" id="6" class="game" onclick="updateText('6')">&nbsp;</button><br>
+
+      <button type="button" id="7" class="game" onclick="updateText('7')">&nbsp;</button><button type="button" id="8" class="game" onclick="updateText('8')">&nbsp;</button><button type="button" id="9" class="game" onclick="updateText('9')">&nbsp;</button><br>
+   </div>
+</div>
+
+
+</body>
+
+
+
+</html>
